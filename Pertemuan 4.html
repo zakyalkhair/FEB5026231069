@@ -1,187 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap 4 Sidebar</title>
-    
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    
-    <!-- jQuery, Popper.js, Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <style>
-        /* Sidebar Styling */
-        .sidebar {
-            width: 250px;
-            height: 100vh;
-            background-color: #135589;
-            color: white;
-            padding: 20px;
-            position: fixed;
-            top: 0;
-            left: 0;
-        }
-
-        .sidebar a {
-  color: white;
-  display: block;
-  padding: 10px;
-  text-decoration: none;
-  border-radius: 8px; /* Supaya saat hover sudut membulat */
-  transition: background-color 0.3s ease; /* Efek transisi */
-}
-
-.sidebar a:hover {
-  background-color: #073a5d; /* Warna hover (lebih gelap/terang sesuai selera) */
-  text-decoration: none; /* Pastikan tidak ada garis bawah */
-}
-
-
-        .content {
-            margin-left: 260px; /* Menyesuaikan dengan sidebar */
-            padding: 20px;
-        }
-        /* Tambahan styling untuk card agar sudut membulat dan bayangan lembut */
-        .custom-card {
-  border-radius: 15px;
-  box-shadow: 0 8px 20px 5px rgba(0, 0, 0, 0.9);
-  /* offset-x = 0, offset-y = 8px, blur-radius = 20px, spread-radius = 5px */
-  border: none;
-}
-
-
-    /* Styling untuk nama dan job agar terlihat lebih jelas */
-    .name-text {
-      font-weight: 700; /* lebih tebal dari fw-bold */
-      font-size: 1.1rem;
-      color: #333;      /* teks lebih gelap */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap 4 Sidebar Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  
+  <style>
+    /* Sidebar Styling */
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: #135589;
+      color: white;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      transition: margin-left 0.3s ease-in-out;
     }
-
+    .sidebar a {
+      color: white;
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar a:hover {
+      background-color: #073a5d;
+      text-decoration: none;
+    }
+    
+    /* Content Styling */
+    .content {
+      margin-left: 260px;
+      width: calc(100% - 260px);
+      padding: 20px;
+      transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+    }
+    
+    /* Toggle Checkbox */
+    #toggle {
+      display: none;
+    }
+    .toggle-label {
+      font-size: 1.5rem;
+      background: #135589;
+      color: white;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-right: 15px;
+    }
+    .toggle-label:hover {
+      background-color: #073a5d;
+    }
+    #toggle:checked ~ .sidebar {
+      margin-left: -250px;
+    }
+    #toggle:checked ~ .content {
+      margin-left: 0;
+      width: 100%;
+    }
+    
+    /* Header Toggle */
+    .header-toggle {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    /* Custom Card Styling */
+    .custom-card {
+      border-radius: 15px;
+      box-shadow: 0 8px 20px 5px rgba(0, 0, 0, 0.09);
+      border: none;
+      background-color: #fff;
+    }
+    
+    /* Text Styling */
+    .name-text {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #333;
+    }
     .contract-text {
       font-size: 0.8rem;
-      color: #aaa;      /* lebih lembut */
+      color: #aaa;
     }
-
-    /* Styling bintang rating agar abu-abu */
-    .rating-star {
-      font-size: 1.2rem;
-      color: #ccc;      /* abu-abu untuk bintang belum diisi */
-      margin: 0 2px;    /* jarak antar bintang */
-    }
-    </style>
+  </style>
 </head>
 <body>
-
-    <div class="sidebar d-flex flex-column text-white" style="min-height: 100vh;">
-        <div class="d-flex align-items-center mb-4">
-          <!-- Gambar User -->
-          <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\3135715.png"
-               class="rounded-circle img-fluid mr-3"
-               style="width: 45px; height: 45px; object-fit: cover;"
-               alt="User">
-          <!-- Info User -->
-          <div>
-            <h6 class="mb-1">User</h6>
-            <p class="mb-0 small">user@mail.com</p>
+  <!-- Toggle Input (ditempatkan di atas agar selektor sibling berfungsi) -->
+  <input type="checkbox" id="toggle">
+  
+  <!-- Sidebar -->
+  <div class="sidebar d-flex flex-column">
+    <div class="d-flex align-items-center mb-4">
+      <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\icon profil.png" 
+           class="rounded-circle mr-3" 
+           style="width: 45px; height: 45px; object-fit: cover;" 
+           alt="User">
+      <div>
+        <h6 class="mb-1">User</h6>
+        <p class="mb-0 small">user@mail.com</p>
+      </div>
+    </div>
+    
+    <!-- Sidebar Menu -->
+    <a href="#" class="active d-flex align-items-center mb-2">
+      <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\helperlog.png" 
+           class="mr-2" 
+           style="width: 20px; height: 20px;" 
+           alt="Helperlog"> Helperlog
+    </a>
+    <a href="#" class="d-flex align-items-center mb-2">
+      <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\helperfind.png" 
+           class="mr-2" 
+           style="width: 20px; height: 20px;" 
+           alt="Helperfind"> Helperfind
+    </a>
+    <a href="#" class="d-flex align-items-center mb-2">
+      <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\helperassistant.png" 
+           class="mr-2" 
+           style="width: 20px; height: 20px;" 
+           alt="Helperassist"> Helperassist
+    </a>
+    
+    <!-- Logout Button -->
+    <div class="mt-auto">
+      <button class="btn btn-light btn-block d-flex align-items-center justify-content-center">
+        <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\logout.webp" 
+             class="mr-2" 
+             style="width: 20px; height: 20px;" 
+             alt="Logout"> Log Out
+      </button>
+    </div>
+  </div>
+  
+  <!-- Main Content -->
+  <div class="content">
+    <div class="header-toggle">
+      <label for="toggle" class="toggle-label">&#9776;</label>
+      <h2 class="font-weight-bold text-dark mb-0" style="font-size: 1.5rem;">Helperlog Dashboard</h2>
+    </div>
+    
+    <!-- Custom Card 1 -->
+    <div class="custom-card p-3 mb-3 shadow-sm">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\icon intan.png" 
+               class="rounded-circle img-fluid" 
+               alt="Intan Permata" 
+               style="width: 55px; height: 55px; object-fit: cover;">
+        </div>
+        <div class="col">
+          <h5 class="name-text mb-0">Intan Permata</h5>
+          <small class="text-muted font-weight-bold">Baby Sitter</small>
+          <p class="contract-text mb-0">Masa Kontrak: 12 bulan</p>
+        </div>
+        <div class="col-auto text-center">
+          <div class="d-flex align-items-center justify-content-center">
+            <span class="text-warning h5 m-1">
+              <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\bintang nonaktif.png" alt="">
+            </span>
+            <span class="text-warning h5 m-1">
+              <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\bintang nonaktif.png" alt="">
+            </span>
+            <span class="text-warning h5 m-1">
+              <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\bintang nonaktif.png" alt="">
+            </span>
+            <span class="text-warning h5 m-1">
+              <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\bintang nonaktif.png" alt="">
+            </span>
+            <span class="text-warning h5 m-1">
+              <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\bintang nonaktif.png" alt="">
+            </span>
+          </div>
+          <p class="text-muted mb-0">Beri Penilaian untuk Intan <span role="img" aria-label="emoji">🤗</span></p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Custom Card 2 -->
+    <div class="custom-card p-3 mb-3 shadow-sm">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\icon budi.png" 
+               class="rounded-circle img-fluid" 
+               alt="Budi Dorami" 
+               style="width: 55px; height: 55px; object-fit: cover;">
+        </div>
+        <div class="col">
+          <h5 class="name-text mb-0">Budi Dorami</h5>
+          <small class="text-muted font-weight-bold">Satpam</small>
+          <p class="contract-text mb-0">Masa Kontrak: 6 bulan</p>
+        </div>
+        <div class="col-auto d-flex align-items-center justify-content-center">
+          <span class="text-primary h5 font-weight-bold mr-2">4.3</span>
+          <div class="text-center">
+            <div class="d-flex align-items-center justify-content-center">
+              <span class="text-warning h5 m-1">
+                <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\bintang.png" alt="">
+              </span>
+              <span class="text-warning h5 m-1">
+                <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\bintang.png" alt="">
+              </span>
+              <span class="text-warning h5 m-1">
+                <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\bintang.png" alt="">
+              </span>
+              <span class="text-warning h5 m-1">
+                <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\bintang.png" alt="">
+              </span>
+              <span class="text-warning h5 m-1">
+                <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\bintang nonaktif.png" alt="">
+              </span>
+            </div>
+            <p class="text-muted mb-0">Sudah diberi Penilaian <span role="img" aria-label="emoji">👍</span></p>
           </div>
         </div>
-      
-        <!-- Menu Sidebar -->
-        <a href="#" class="active"><img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\interface-file-clipboard-add--edit-task-edition-add-clipboard-form.png"
-            class="mr-2"
-            style="width: 20px; height: 20px;">Helperlog</a>
-            
-        <a href="#"><img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\Search.png"
-            class="mr-2"
-            style="width: 20px; height: 20px;">Helperfind</a>
-        <a href="#"><img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\Message square.png"
-            class="mr-2"
-            style="width: 20px; height: 20px;">Helperassist</a>
-      
-        <!-- Tombol Logout -->
-        <div class="mt-auto">
-            
-    <button class="btn btn-light btn-block"><img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\logout-512.webp"
-        alt="Logout Icon"
-        class="mr-2"
-        style="width: 20px; height: 20px;">Log Out</button>
-  </div>
       </div>
-      
-    
-    <div class="content">
-        <h2 class="font-weight-bold text-dark" style="font-size: 1.5rem; margin-bottom: 80px;">
-            Helperlog Dashboard
-          </h2>
-        <div class="custom-card p-3 mb-3 shadow-sm">
-            <div class="row align-items-center">
-                <div class="col-auto">
-                    <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\Frame 627275.png" 
-                         class="rounded-circle img-fluid" 
-                         alt="User" 
-                         style="width: 55px; height: 55px; object-fit: cover;">
-                </div>
-
-                <div class="col">
-                    <h5 class="name-text mb-0">Intan Permata</h5>
-                    <small class="text-muted font-weight-bold">Baby Sitter</small>
-                    <p class="contract-text mb-0">Masa Kontrak: 12 bulan</p>
-                </div>
-                
-                
-                <div class="col-auto text-center">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <span class="text-warning h5 m-1"><img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\star disable.png" alt=""></span>
-                        <span class="text-warning h5 m-1"><img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\star disable.png" alt=""></span>
-                        <span class="text-warning h5 m-1"><img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\star disable.png" alt=""></span>
-                        <span class="text-warning h5 m-1"><img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\star disable.png" alt=""></span>
-                        <span class="text-warning h5 m-1"><img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\star disable.png" alt=""></span>
-                    </div>
-                    <p class="text-muted mb-0">Beri Penilaian untuk Intan <span role="img" aria-label="emoji">🤗</span></p>
-                </div>
-                
-            </div>
-        </div>
-    
-        <div class="custom-card p-3 mb-3 shadow-sm">
-            <div class="row align-items-center">
-                <div class="col-auto">
-                    <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\Frame 40792-1.png" 
-                         class="rounded-circle img-fluid" 
-                         alt="User" 
-                         style="width: 55px; height: 55px; object-fit: cover;">
-                </div>
-
-            
-                <div class="col">
-                    <h5 class="name-text mb-0">Budi Dorami</h5>
-                    <small class="text-muted font-weight-bold">Satpam</small>
-                    <p class="contract-text mb-0">Masa Kontrak: 6 bulan</p>
-                </div>
-
-                
-                <span class="text-primary h5 font-weight-bold mr-2">4.3</span>
-                <div class="col-auto text-center">
-                    <!-- Baris rating dan skor -->
-                    <div class="col-auto text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                            <span class="text-warning h5 m-1"><img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\Star 2.png" alt=""></span>
-                            <span class="text-warning h5 m-1"><img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\Star 2.png" alt=""></span>
-                            <span class="text-warning h5 m-1"><img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\Star 2.png" alt=""></span>
-                            <span class="text-warning h5 m-1"><img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\Star 2.png" alt=""></span>
-                            <span class="text-warning h5 m-1"><img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\star disable.png" alt=""></span>
-                        </div>
-                                   
-                    <!-- Keterangan -->
-                    <p class="text-muted mb-0">Sudah diberi Penilaian <span role="img" aria-label="emoji">👍</span></p>
-                </div>
-            </div>
-        </div>
-
+    </div>
+  </div>
+  
+  <!-- Bootstrap JS dan dependensinya -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
