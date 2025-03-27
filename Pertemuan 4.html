@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bootstrap 4 Sidebar Dashboard</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sidebar Bootstrap</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <style>
     /* Sidebar Styling */
     .sidebar {
@@ -19,11 +20,14 @@
       top: 0;
       left: 0;
       transition: margin-left 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+
     }
     .sidebar a {
       color: white;
       display: block;
-      padding: 10px;
+      padding: 8px;
       text-decoration: none;
       border-radius: 8px;
       transition: background-color 0.3s ease;
@@ -31,53 +35,6 @@
     .sidebar a:hover {
       background-color: #073a5d;
       text-decoration: none;
-    }
-    
-    /* Content Styling */
-    .content {
-      margin-left: 260px;
-      width: calc(100% - 260px);
-      padding: 20px;
-      transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
-    }
-    
-    /* Toggle Checkbox */
-    #toggle {
-      display: none;
-    }
-    .toggle-label {
-      font-size: 1.5rem;
-      background: #135589;
-      color: white;
-      padding: 5px 10px;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-right: 15px;
-    }
-    .toggle-label:hover {
-      background-color: #073a5d;
-    }
-    #toggle:checked ~ .sidebar {
-      margin-left: -250px;
-    }
-    #toggle:checked ~ .content {
-      margin-left: 0;
-      width: 100%;
-    }
-    
-    /* Header Toggle */
-    .header-toggle {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    
-    /* Custom Card Styling */
-    .custom-card {
-      border-radius: 15px;
-      box-shadow: 0 8px 20px 5px rgba(0, 0, 0, 0.09);
-      border: none;
-      background-color: #fff;
     }
     
     /* Text Styling */
@@ -90,62 +47,179 @@
       font-size: 0.8rem;
       color: #aaa;
     }
+    .logout-btn {
+    background-color: #487ba3; 
+    color: black;
+    padding: 8px;
+    
+}
+
+.logout-btn img {
+    width: 25px;
+    height: 20px;
+    margin-right: 10px; /* Jarak antara ikon dan teks */
+}    
+
+    /* Content Styling */
+    .content {
+      margin-left: 260px;
+      margin-top: 30px;
+      width: calc(100% - 260px);
+      padding: 20px;
+      transition: margin-left 0.3s ease-in-out;
+    }
+    
+    body {
+    font-family: 'Poppins', sans-serif;
+    display: fixed;
+    transition: all 0.3s ease;
+    }
+    /* Sidebar Styles */
+    
+    .toggle-btn {
+    position: fixed;
+    top: 15px;
+    left: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+    z-index: 1050;
+}
+
+    
+    .close-btn {
+        left: 200px;
+        top: 3px;    }
+    
+    .open-btn {
+      
+        display: block;
+        background-color: #135589;
+        color: white;
+        border: none;
+        padding: 4px;
+        margin-left: auto;
+        border-radius: 4px;
+        cursor: pointer;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+      
+    
+    /* Content Styles */
+    
+    
+    /* Toggle Sidebar buat interaktif*/ 
+    .toggle-checkbox:checked ~ .sidebar {
+    margin-left: -250px;
+}
+    
+    .toggle-checkbox:checked ~ .sidebar .close-btn {
+        display: none;
+    }
+    
+    .toggle-checkbox:checked ~ .open-btn {
+        display: block;
+    }
+    
+    .toggle-checkbox:not(:checked) ~ .sidebar .open-btn {
+        display: none;
+    }
+    
+    .toggle-checkbox:checked ~ .content {
+        margin-left: 40px;
+    }
+ 
+    .toggle-checkbox:not(:checked) ~ .open-btn {
+        display: none;
+    }
+
+    /* Custom Card Styling */
+    .custom-card {
+      border-radius: 15px;
+      box-shadow: 0 8px 20px 5px rgba(0, 0, 0, 0.09);
+      border: none;
+      background-color: #fff;
+    }
+    
+
   </style>
 </head>
 <body>
-  <!-- Toggle Input (ditempatkan di atas agar selektor sibling berfungsi) -->
-  <input type="checkbox" id="toggle">
   
+  <!-- Toggle Input (ditempatkan di atas agar selektor sibling berfungsi) -->
+  <input type="checkbox" id="toggleSidebarCheckbox" class="toggle-checkbox" > 
+  <!-- open button -->
   <!-- Sidebar -->
-  <div class="sidebar d-flex flex-column">
-    <div class="d-flex align-items-center mb-4">
-      <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\icon profil.png" 
-           class="rounded-circle mr-3" 
-           style="width: 45px; height: 45px; object-fit: cover;" 
-           alt="User">
-      <div>
-        <h6 class="mb-1">User</h6>
-        <p class="mb-0 small">user@mail.com</p>
-      </div>
+<div class="sidebar d-flex flex-column">
+
+  <!-- Wrapper untuk tombol toggle -->
+  <div class="toggle-wrapper" style=" margin-bottom: 15px;">
+    <label for="toggleSidebarCheckbox" class="btn toggle-btn open-btn">
+      <i class="fa fa-bars"></i> 
+    </label>
+    <label for="toggleSidebarCheckbox" class="btn toggle-btn close-btn">
+      <i class="fa fa-angle-double-left" style="color: white;"></i> 
+    </label>
+  </div>
+
+  <!-- Bagian Profil -->
+  <div class="d-flex align-items-center mb-4 mt-3">
+    <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\icon profil.png" 
+         class="rounded-circle me-2" 
+         style="width: 40px; height: 40px; object-fit: cover;" 
+         alt="User">
+    <div>
+      <h6 class="mb-1 text-white fw-bold">User</h6>
+      <p class="mb-0 text-white small">user@mail.com</p>
     </div>
-    
-    <!-- Sidebar Menu -->
-    <a href="#" class="active d-flex align-items-center mb-2">
+  </div>
+
+  <!-- Sidebar Menu -->
+  <div>
+    <a href="#" class="d-flex ml-3">
       <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\helperlog.png" 
-           class="mr-2" 
+           class="me-2" 
            style="width: 20px; height: 20px;" 
            alt="Helperlog"> Helperlog
     </a>
+
     <a href="#" class="d-flex align-items-center mb-2">
       <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\helperfind.png" 
-           class="mr-2" 
+           class="me-2" 
            style="width: 20px; height: 20px;" 
-           alt="Helperfind"> Helperfind
+           alt="Helperfind"> 
+      Helperfind
     </a>
+
     <a href="#" class="d-flex align-items-center mb-2">
       <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\helperassistant.png" 
-           class="mr-2" 
+           class="me-2" 
            style="width: 20px; height: 20px;" 
            alt="Helperassist"> Helperassist
     </a>
-    
-    <!-- Logout Button -->
-    <div class="mt-auto">
-      <button class="btn btn-light btn-block d-flex align-items-center justify-content-center">
-        <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\logout.webp" 
-             class="mr-2" 
-             style="width: 20px; height: 20px;" 
-             alt="Logout"> Log Out
-      </button>
-    </div>
   </div>
+
+  <!-- Logout Button -->
+  <div class="mt-auto text-center">
+    <a href="#" class="logout-btn btn-sm d-inline-flex align-items-center" style="align-self: center; margin-bottom: 160px;">
+      <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\logout.webp" 
+           class="mr-2" 
+           style="width: 20px; height: 20px;" 
+           alt="Logout"> Logout
+    </a>
+  </div>
+</div>
+
+  
+  <!-- Side -->
   
   <!-- Main Content -->
   <div class="content">
-    <div class="header-toggle">
-      <label for="toggle" class="toggle-label">&#9776;</label>
-      <h2 class="font-weight-bold text-dark mb-0" style="font-size: 1.5rem;">Helperlog Dashboard</h2>
-    </div>
+        <h2 style="margin-left: 20px; margin-bottom: 60px;"><b>Helperlog Dashboard</b></h2>
+        <br> 
     
     <!-- Custom Card 1 -->
     <div class="custom-card p-3 mb-3 shadow-sm">
@@ -225,9 +299,5 @@
     </div>
   </div>
   
-  <!-- Bootstrap JS dan dependensinya -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
