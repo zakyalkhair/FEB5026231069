@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Sidebar Styling */
     .sidebar {
       width: 250px;
       height: 100vh;
@@ -37,7 +36,6 @@
       text-decoration: none;
     }
     
-    /* Text Styling */
     .name-text {
       font-weight: 700;
       font-size: 1.1rem;
@@ -57,10 +55,9 @@
 .logout-btn img {
     width: 25px;
     height: 20px;
-    margin-right: 10px; /* Jarak antara ikon dan teks */
+    margin-right: 10px; 
 }    
 
-    /* Content Styling */
     .content {
       margin-left: 260px;
       margin-top: 30px;
@@ -74,7 +71,6 @@
     display: fixed;
     transition: all 0.3s ease;
     }
-    /* Sidebar Styles */
     
     .toggle-btn {
     position: fixed;
@@ -106,12 +102,7 @@
         padding-left: 10px;
         padding-right: 10px;
     }
-      
-    
-    /* Content Styles */
-    
-    
-    /* Toggle Sidebar buat interaktif*/ 
+
     .toggle-checkbox:checked ~ .sidebar {
     margin-left: -250px;
 }
@@ -136,7 +127,6 @@
         display: none;
     }
 
-    /* Custom Card Styling */
     .custom-card {
       border-radius: 15px;
       box-shadow: 0 8px 20px 5px rgba(0, 0, 0, 0.09);
@@ -149,23 +139,20 @@
 </head>
 <body>
   
-  <!-- Toggle Input (ditempatkan di atas agar selektor sibling berfungsi) -->
-  <input type="checkbox" id="toggleSidebarCheckbox" class="toggle-checkbox" > 
-  <!-- open button -->
-  <!-- Sidebar -->
+  <input type="checkbox" id="toggleSidebarCheckbox" class="toggle-checkbox" style="display: none;">
+  
+
 <div class="sidebar d-flex flex-column">
 
-  <!-- Wrapper untuk tombol toggle -->
   <div class="toggle-wrapper" style=" margin-bottom: 15px;">
-    <label for="toggleSidebarCheckbox" class="btn toggle-btn open-btn">
+    <label for="toggleSidebarCheckbox" class="toggle-btn open-btn">
       <i class="fa fa-bars"></i> 
     </label>
-    <label for="toggleSidebarCheckbox" class="btn toggle-btn close-btn">
-      <i class="fa fa-angle-double-left" style="color: white;"></i> 
+    <label for="toggleSidebarCheckbox" class="toggle-btn close-btn">
+      <i class="fa fa-angle-double-left"></i> 
     </label>
   </div>
 
-  <!-- Bagian Profil -->
   <div class="d-flex align-items-center mb-4 mt-3">
     <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\icon profil.png" 
          class="rounded-circle me-2" 
@@ -177,7 +164,6 @@
     </div>
   </div>
 
-  <!-- Sidebar Menu -->
   <div>
     <a href="#" class="d-flex ml-3">
       <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\helperlog.png" 
@@ -202,7 +188,6 @@
     </a>
   </div>
 
-  <!-- Logout Button -->
   <div class="mt-auto text-center">
     <a href="#" class="logout-btn btn-sm d-inline-flex align-items-center" style="align-self: center; margin-bottom: 160px;">
       <img src="C:\Zaky\Kuliah\Semester 4\Pemrograman Web\FEB5026231069\image\logout.webp" 
@@ -213,15 +198,10 @@
   </div>
 </div>
 
-  
-  <!-- Side -->
-  
-  <!-- Main Content -->
   <div class="content">
         <h2 style="margin-left: 20px; margin-bottom: 60px;"><b>Helperlog Dashboard</b></h2>
         <br> 
     
-    <!-- Custom Card 1 -->
     <div class="custom-card p-3 mb-3 shadow-sm">
       <div class="row align-items-center">
         <div class="col-auto">
@@ -258,7 +238,6 @@
       </div>
     </div>
     
-    <!-- Custom Card 2 -->
     <div class="custom-card p-3 mb-3 shadow-sm">
       <div class="row align-items-center">
         <div class="col-auto">
